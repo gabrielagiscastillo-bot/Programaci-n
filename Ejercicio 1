@@ -1,0 +1,115 @@
+//Métodos
+package metodos;
+
+public class sistema {
+    private String direccionIP;
+    private String horaAcceso;
+    private boolean permitida;
+    public sistema(String direccionIP,
+                   String horaAcceso,
+                   boolean permitida) {
+
+        this.direccionIP = direccionIP;
+        this.horaAcceso = horaAcceso;
+        this.permitida = permitida;
+    }
+    public String getDireccionIP() {
+        return direccionIP;
+    }
+
+    public String getHoraAcceso() {
+        return horaAcceso;
+    }
+
+    public boolean isPermitida() {
+        return permitida;
+    }
+
+    public void setDireccionIP(String direccionIP) {
+        this.direccionIP = direccionIP;
+    }
+
+    public void setHoraAcceso(String horaAcceso) {
+        this.horaAcceso = horaAcceso;
+    }
+
+    public void setPermitida(boolean permitida) {
+        this.permitida = permitida;
+    }
+    public void mostrarEstado() {
+
+        System.out.println("IP: " + direccionIP);
+        System.out.println("Hora: " + horaAcceso);
+
+        if(permitida){
+
+            System.out.println("Acceso permitido");
+
+        }else{
+
+            System.out.println("Acceso denegado");
+        }
+    }
+}
+
+
+// Interfaz
+package INTERFAZ;
+
+import java.util.Scanner;
+import metodos.sistema;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        String ip;
+        String hora;
+        boolean permitida;
+
+        final int MAX = 2;
+        sistema registros[] = new sistema[MAX];
+
+        Scanner sc = new Scanner(System.in);
+
+        for(int i = 0; i < registros.length; i++){
+
+            System.out.print("Ingrese dirección IP: ");
+            ip = sc.nextLine();
+
+            System.out.print("Ingrese hora de acceso: ");
+            hora = sc.nextLine();
+
+            System.out.print("¿Acceso permitido? (true/false): ");
+            permitida = Boolean.parseBoolean(sc.nextLine());
+
+            registros[i] = new sistema(ip,hora,permitida);
+        }
+
+        for(int i = 0; i < registros.length; i++){
+
+            registros[i].mostrarEstado();
+        }
+
+        int indice = 0;
+
+        if(indice < MAX){
+
+            System.out.print("Ingrese dirección IP: ");
+            ip = sc.nextLine();
+
+            System.out.print("Ingrese hora de acceso: ");
+            hora = sc.nextLine();
+
+            System.out.print("¿Acceso permitido? (true/false): ");
+            permitida = Boolean.parseBoolean(sc.nextLine());
+
+            registros[indice++] =
+                    new sistema(ip,hora,permitida);
+
+        }else{
+
+            System.out.println("No hay más memoria");
+        }
+    }
+}
